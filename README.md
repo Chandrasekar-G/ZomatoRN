@@ -8,3 +8,9 @@ create-react-native-app ZomatoRN
 cd ZomatoRN
 npm start
 ```
+
+## 2. Navigation
+
+```
+npm install --save react-navigation
+```

@@ -1,8 +1,8 @@
 import React from "react";
-import LoginPage from "./containers/LoginPage";
+import RootStack from "./routes/routes";
 
 export default class App extends React.Component {
   render() {
-    return <LoginPage />;
+    return <RootStack />;
   }
 }
