@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 
 export default class HomePage extends React.Component {
   constructor(props) {
@@ -28,10 +28,20 @@ export default class HomePage extends React.Component {
     });
   };
 
+  renderRestaurants = (item) => {
+      let restaurant = item.item.restaurant;
+      return (
+          <Text>{restaurant.name}</Text>
+      )
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is the HomePage</Text>
+        <FlatList
+          data={this.state.restaurants}
+          renderItem={this.renderRestaurants}
+        />
       </View>
     );
   }
