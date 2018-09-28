@@ -12,11 +12,24 @@ const RootStack = createStackNavigator(
       }
     },
     Home: {
-      screen: HomePage
+      screen: HomePage,
+      navigationOptions: {
+        title: "Restaurant List",
+        headerLeft: null
+      }
     }
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "Login",
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: "#E20025"
+      },
+      headerTitleStyle: {
+        color: "#FFF",
+        fontWeight: "100"
+      }
+    }
   }
 );
 
