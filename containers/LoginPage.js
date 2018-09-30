@@ -26,7 +26,7 @@ export default class LoginPage extends React.Component {
 
   login = () => {
     console.log(this.state);
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate("Home");
   };
 
   render() {

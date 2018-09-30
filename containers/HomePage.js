@@ -1,12 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator
+} from "react-native";
 import RestaurantCard from "../components/RestaurantCard";
 
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: []
+      restaurants: [],
+      isLoading: false
     };
   }
 
@@ -25,6 +32,7 @@ export default class HomePage extends React.Component {
   }
 
   getRestaurants = (lat, lon) => {
+    this.setState({ isLoading: true });
     fetch(
       `https://developers.zomato.com/api/v2.1/geocode?lat=${lat}&lon=${lon}`,
       {
@@ -35,6 +43,7 @@ export default class HomePage extends React.Component {
       res.json().then(restaurants => {
         this.setState({ restaurants: restaurants.nearby_restaurants });
         console.log(this.state.restaurants);
+        this.setState({ isLoading: false });
       });
     });
   };
@@ -47,11 +56,17 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlatList
-          data={this.state.restaurants}
-          renderItem={this.renderRestaurants}
-          keyExtractor={item => item.restaurant.id}
-        />
+        {this.state.isLoading ? (
+          <View style={styles.loaderView}>
+            <ActivityIndicator size="large" color="#E20025" />
+          </View>
+        ) : (
+          <FlatList
+            data={this.state.restaurants}
+            renderItem={this.renderRestaurants}
+            keyExtractor={item => item.restaurant.id}
+          />
+        )}
       </View>
     );
   }
@@ -60,6 +75,10 @@ export default class HomePage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#FFF"
+  },
+  loaderView: {
+    flex: 1,
+    justifyContent: 'center'
   }
 });
