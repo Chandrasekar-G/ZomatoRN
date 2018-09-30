@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import RestaurantCard from "../components/RestaurantCard";
 
 export default class HomePage extends React.Component {
   constructor(props) {
@@ -28,12 +29,10 @@ export default class HomePage extends React.Component {
     });
   };
 
-  renderRestaurants = (item) => {
-      let restaurant = item.item.restaurant;
-      return (
-          <Text>{restaurant.name}</Text>
-      )
-  }
+  renderRestaurants = item => {
+    let restaurant = item.item.restaurant;
+    return <RestaurantCard restaurantItem={restaurant} />;
+  };
 
   render() {
     return (
@@ -41,6 +40,7 @@ export default class HomePage extends React.Component {
         <FlatList
           data={this.state.restaurants}
           renderItem={this.renderRestaurants}
+          keyExtractor={item => item.restaurant.id}
         />
       </View>
     );
@@ -51,7 +51,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
   }
 });
