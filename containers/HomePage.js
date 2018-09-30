@@ -11,7 +11,17 @@ export default class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    this.getRestaurants(13.08268, 80.270721);
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.getRestaurants(
+          position.coords.latitude,
+          position.coords.longitude
+        );
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getRestaurants = (lat, lon) => {
@@ -50,6 +60,6 @@ export default class HomePage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   }
 });
