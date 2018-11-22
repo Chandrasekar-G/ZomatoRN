@@ -3,7 +3,7 @@
 ## 1. Installation
 
 ```
-npm i -g ZomatoRN
+npm i -g create-react-native-app
 create-react-native-app ZomatoRN
 cd ZomatoRN
 npm start
